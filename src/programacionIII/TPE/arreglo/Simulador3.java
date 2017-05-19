@@ -136,7 +136,6 @@ public class Simulador3 {
 
 		ArregloUsuario us = new ArregloUsuario();
 		us = reader();
-		System.out.println(us.getCantElem());
 		writterAlta(us);
      	writterBusqueda(us);
 	}
