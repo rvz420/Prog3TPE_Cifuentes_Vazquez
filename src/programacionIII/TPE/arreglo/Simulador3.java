@@ -14,7 +14,7 @@ public class Simulador3 {
 		String csvFile = "dataset_3000000.csv";
 		String line = "";
 		String cvsSplitBy = ";";
-		int i=0;
+
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 			br.readLine();
 			while ((line = br.readLine()) != null) {
@@ -22,7 +22,7 @@ public class Simulador3 {
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
 				usuarios.agregar(usuario.getDni());
-				System.out.println(i++);
+
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -38,7 +38,7 @@ public class Simulador3 {
 		BufferedWriter bw = null;
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-			br.readLine();
+
 			File file = new File("salidaAlta5.csv");
 			if (!file.exists()) {
 				file.createNewFile();
@@ -48,11 +48,11 @@ public class Simulador3 {
 			bw = new BufferedWriter(fw);
 
 			long time_start, time_end;
-			
+
 			String primeraLinea = "Usuario;Tiempo";
 			bw.write(primeraLinea);
 			bw.newLine();
-			
+
 			while ((line = br.readLine()) != null) {
 				time_start = System.nanoTime();
 				String[] items = line.split(cvsSplitBy);
@@ -87,7 +87,7 @@ public class Simulador3 {
 		BufferedWriter bw = null;
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-	
+
 			File file = new File("salidaBusqueda6.csv");
 			if (!file.exists()) {
 				file.createNewFile();
@@ -97,7 +97,7 @@ public class Simulador3 {
 			bw = new BufferedWriter(fw);
 
 			long time_start, time_end;
-			
+
 			String primeraLinea = "Usuario;Tiempo;Encontrado?";
 			bw.write(primeraLinea);
 			bw.newLine();
@@ -107,19 +107,19 @@ public class Simulador3 {
 				String[] items = line.split(cvsSplitBy);
 				boolean existe = usuarios.contiene(items[0]);
 				time_end = System.nanoTime();
-				
-				
-				
+
+
+
 				String contenidoLinea="";
 				if(existe){
 					contenidoLinea = items[0]+";"+(( time_end - time_start ))+";Encontrado";
 				}else{
 					contenidoLinea = items[0]+";"+(( time_end - time_start ))+";NoEncontrado";
 				}
-				
+
 				bw.write(contenidoLinea);
 				bw.newLine();
-			} 
+			}
 		}catch (IOException ioe) {
 			ioe.printStackTrace();
 		} finally {
@@ -136,8 +136,8 @@ public class Simulador3 {
 
 		ArregloString us = new ArregloString();
 		us = reader();
-//		writterAlta(us);
-//		writterBusqueda(us);
+		writterAlta(us);
+     	writterBusqueda(us);
 	}
 
 }

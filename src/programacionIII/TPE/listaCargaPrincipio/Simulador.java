@@ -37,7 +37,7 @@ public class Simulador {
 		BufferedWriter bw = null;
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-			br.readLine();
+
 			File file = new File("salidaAlta13.csv");
 			if (!file.exists()) {
 				file.createNewFile();
@@ -47,11 +47,11 @@ public class Simulador {
 			bw = new BufferedWriter(fw);
 
 			long time_start, time_end;
-			
+
 			String primeraLinea = "Usuario;Tiempo";
 			bw.write(primeraLinea);
 			bw.newLine();
-			
+
 			while ((line = br.readLine()) != null) {
 				time_start = System.nanoTime();
 				String[] items = line.split(cvsSplitBy);
@@ -86,7 +86,7 @@ public class Simulador {
 		BufferedWriter bw = null;
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
-			br.readLine();
+
 			File file = new File("salidaBusqueda14.csv");
 			if (!file.exists()) {
 				file.createNewFile();
@@ -96,7 +96,7 @@ public class Simulador {
 			bw = new BufferedWriter(fw);
 
 			long time_start, time_end;
-			
+
 			String primeraLinea = "Usuario;Tiempo;Encontrado?";
 			bw.write(primeraLinea);
 			bw.newLine();
@@ -106,19 +106,19 @@ public class Simulador {
 				String[] items = line.split(cvsSplitBy);
 				boolean existe = usuarios.contiene(items[0]);
 				time_end = System.nanoTime();
-				
-				
-				
+
+
+
 				String contenidoLinea="";
 				if(existe){
 					contenidoLinea = items[0]+";"+(( time_end - time_start ))+";Encontrado";
 				}else{
 					contenidoLinea = items[0]+";"+(( time_end - time_start ))+";NoEncontrado";
 				}
-				
+
 				bw.write(contenidoLinea);
 				bw.newLine();
-			} 
+			}
 		}catch (IOException ioe) {
 			ioe.printStackTrace();
 		} finally {
