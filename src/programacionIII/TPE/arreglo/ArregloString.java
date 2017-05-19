@@ -3,6 +3,7 @@ package programacionIII.TPE.arreglo;
 public class ArregloString {
 
 	String[] arreglo;
+	boolean ordenado = false;
 	int cantElem = 0;
 
 	public ArregloString(){
@@ -51,7 +52,18 @@ public class ArregloString {
 		}
 		this.arreglo[pos] = elem;
 	}
-
+	
+	public void replace (int i, int j){
+		arreglo[i] = arreglo[j];
+	}
+	
+	public void intercambiar(int i, int j){
+		String aux;
+		aux = arreglo[i];
+		arreglo[i] = arreglo[j];
+		arreglo[j] = aux;
+	}
+	
 	public int getCantElem(){
 		return this.cantElem;
 	}
