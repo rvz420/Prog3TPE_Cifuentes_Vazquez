@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public class Simulador2 {
 
-	public static ArregloString reader (){
-		ArregloString usuarios = new ArregloString();
+	public static ArregloUsuario reader (){
+		ArregloUsuario usuarios = new ArregloUsuario();
 		String csvFile = "dataset_1000000.csv";
 		String line = "";
 		String cvsSplitBy = ";";
@@ -21,7 +21,7 @@ public class Simulador2 {
 
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
-				usuarios.agregar(usuario.getDni());
+				usuarios.agregar(usuario);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -29,7 +29,7 @@ public class Simulador2 {
 		return usuarios;
 	}
 
-	public static void writterAlta(ArregloString usuarios){
+	public static void writterAlta(ArregloUsuario usuarios){
 
 		String csvFile = "dataset_insert_10000.csv";
 		String line = "";
@@ -38,7 +38,7 @@ public class Simulador2 {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
-			File file = new File("salidaAlta3.csv");
+			File file = new File("salidaAltaAr1000000.csv");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -56,7 +56,7 @@ public class Simulador2 {
 				time_start = System.nanoTime();
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
-				usuarios.agregar(usuario.getDni());
+				usuarios.agregar(usuario);
 
 				time_end = System.nanoTime();
 
@@ -78,7 +78,7 @@ public class Simulador2 {
 		}
 	}
 
-	public static void writterBusqueda(ArregloString usuarios){
+	public static void writterBusqueda(ArregloUsuario usuarios){
 
 		String csvFile = "dataset_busqueda_10000.csv";
 		String line = "";
@@ -87,7 +87,7 @@ public class Simulador2 {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
-			File file = new File("salidaBusqueda4.csv");
+			File file = new File("salidaBusquedaAr1000000.csv");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -104,7 +104,7 @@ public class Simulador2 {
 			while ((line = br.readLine()) != null) {
 				time_start = System.nanoTime();
 				String[] items = line.split(cvsSplitBy);
-				boolean existe = usuarios.contiene(items[0]);
+				boolean existe = usuarios.existe(items[0]);
 				time_end = System.nanoTime();
 
 
@@ -133,7 +133,7 @@ public class Simulador2 {
 
 	public static void main(String[] args) {
 
-		ArregloString us = new ArregloString();
+		ArregloUsuario us = new ArregloUsuario();
 		us = reader();
 		writterAlta(us);
 		writterBusqueda(us);

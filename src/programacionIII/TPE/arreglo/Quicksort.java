@@ -2,11 +2,11 @@ package programacionIII.TPE.arreglo;
 
 public class Quicksort {
 
-	private String[] array;
+	private Usuario[] array;
 	
-	public Quicksort( String[] a){
+	public Quicksort( Usuario[] a, int cantElem){
 		array = a;
-		sort(0, array.length -1);
+		sort(0, cantElem-1);
 	}
 	
 	public void sort(int izquierdo, int derecho){
@@ -20,13 +20,13 @@ public class Quicksort {
 	
 	int particion(int izquierdo, int derecho){
 	      int i = izquierdo, j = derecho;
-	      String aux;
-	      String pivot = array[(izquierdo + derecho) / 2];
+	      Usuario aux;
+	      Usuario pivot = array[(izquierdo + derecho) / 2];
 	     
 	      while (i <= j) {
-	            while (array[i].compareTo(pivot) < 0)
+	            while (array[i].getDni().compareTo(pivot.getDni()) < 0)
 	                  i++;
-	            while (array[j].compareTo(pivot) > 0)
+	            while (array[j].getDni().compareTo(pivot.getDni()) > 0)
 	                  j--;
 	            if (i <= j) {
 	                  aux = array[i];
@@ -39,4 +39,5 @@ public class Quicksort {
 	     
 	      return i;
 	}
+	
 }
