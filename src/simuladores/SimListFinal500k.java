@@ -1,4 +1,4 @@
-package programacionIII.TPE.listaCargaFinal;
+package simuladores;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,7 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Simulador {
+import estructuras.ListaVinculadaAlFinal;
+import estructuras.Nodo;
+import estructuras.Usuario;
+
+public class SimListFinal500k {
 
 	public static ListaVinculadaAlFinal reader (){
 		ListaVinculadaAlFinal usuarios = new ListaVinculadaAlFinal();
@@ -21,7 +25,8 @@ public class Simulador {
 
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
-				usuarios.add(usuario);
+				Nodo n = new Nodo(usuario);
+				usuarios.add(n);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -56,7 +61,8 @@ public class Simulador {
 				time_start = System.nanoTime();
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
-				usuarios.add(usuario);
+				Nodo n = new Nodo(usuario);
+				usuarios.add(n);
 
 				time_end = System.nanoTime();
 

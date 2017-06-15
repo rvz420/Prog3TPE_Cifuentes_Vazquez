@@ -1,15 +1,15 @@
-package programacionIII.TPE.listaCargaPrincipio;
+package estructuras;
 
 public class ListaVinculadaAlPrincipio {
-	private Usuario first = null;
+	private Nodo first = null;
 	private int cantElem = 0;
 	
 	public String getFirst() {
 
-		return first.getDni();
+		return first.getUsuario().getDni();
 	}
 
-	public void setFirst(Usuario first) {
+	public void setFirst(Nodo first) {
 		this.first = first;
 	}
 
@@ -18,22 +18,22 @@ public class ListaVinculadaAlPrincipio {
 	}
 	
 	public boolean contiene(String id){
-	   Usuario userAux = first;
+	   Nodo nodoAux = first;
 	   for (int i = 0; i < cantElem; i++) {
-	     if((userAux.getDni()).equals(id)){
+	     if((nodoAux.getUsuario().getDni()).equals(id)){
 	       return true;
 	     }else{
-	    	 userAux = userAux.getSig();
+	    	 nodoAux = nodoAux.getSig();
 	     }
 	   }
 	   return false;
 	 }
 
-	public void add(Usuario user){
+	public void add(Nodo n){
 		if(cantElem == 0){
-			first = user;
+			first = n;
 		}else{
-			Usuario tmp = user;
+			Nodo tmp = n;
 			tmp.setSig(first);
 			first = tmp;
 		}

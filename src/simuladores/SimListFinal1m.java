@@ -1,4 +1,4 @@
-package programacionIII.TPE.listaCargaPrincipio;
+package simuladores;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,11 +7,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Simulador3 {
+import estructuras.ListaVinculadaAlFinal;
+import estructuras.Nodo;
+import estructuras.Usuario;
 
-	public static ListaVinculadaAlPrincipio reader (){
-		ListaVinculadaAlPrincipio usuarios = new ListaVinculadaAlPrincipio();
-		String csvFile = "dataset_3000000.csv";
+public class SimListFinal1m {
+
+	public static ListaVinculadaAlFinal reader (){
+		ListaVinculadaAlFinal usuarios = new ListaVinculadaAlFinal();
+		String csvFile = "dataset_1000000.csv";
 		String line = "";
 		String cvsSplitBy = ";";
 
@@ -21,7 +25,8 @@ public class Simulador3 {
 
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
-				usuarios.add(usuario);
+				Nodo n = new Nodo(usuario);
+				usuarios.add(n);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -29,7 +34,7 @@ public class Simulador3 {
 		return usuarios;
 	}
 
-	public static void writterAlta(ListaVinculadaAlPrincipio usuarios){
+	public static void writterAlta(ListaVinculadaAlFinal usuarios){
 
 		String csvFile = "dataset_insert_10000.csv";
 		String line = "";
@@ -38,7 +43,7 @@ public class Simulador3 {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
-			File file = new File("salidaAlta17.csv");
+			File file = new File("salidaAlta9.csv");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -56,7 +61,8 @@ public class Simulador3 {
 				time_start = System.nanoTime();
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
-				usuarios.add(usuario);
+				Nodo n = new Nodo(usuario);
+				usuarios.add(n);
 
 				time_end = System.nanoTime();
 
@@ -78,7 +84,7 @@ public class Simulador3 {
 		}
 	}
 
-	public static void writterBusqueda(ListaVinculadaAlPrincipio usuarios){
+	public static void writterBusqueda(ListaVinculadaAlFinal usuarios){
 
 		String csvFile = "dataset_busqueda_10000.csv";
 		String line = "";
@@ -87,7 +93,7 @@ public class Simulador3 {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
-			File file = new File("salidaBusqueda18.csv");
+			File file = new File("salidaBusqueda10.csv");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -133,10 +139,11 @@ public class Simulador3 {
 
 	public static void main(String[] args) {
 
-		ListaVinculadaAlPrincipio us = new ListaVinculadaAlPrincipio();
+		ListaVinculadaAlFinal us = new ListaVinculadaAlFinal();
 		us = reader();
 		writterAlta(us);
 		writterBusqueda(us);
 	}
 
 }
+

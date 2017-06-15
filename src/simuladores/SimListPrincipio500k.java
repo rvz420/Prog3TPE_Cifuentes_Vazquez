@@ -1,4 +1,4 @@
-package programacionIII.TPE.arreglo;
+package simuladores;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,11 +7,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Simulador2 {
 
-	public static ArregloUsuario reader (){
-		ArregloUsuario usuarios = new ArregloUsuario();
-		String csvFile = "dataset_1000000.csv";
+
+import estructuras.ListaVinculadaAlPrincipio;
+import estructuras.Nodo;
+import estructuras.Usuario;
+
+public class SimListPrincipio500k {
+
+	public static ListaVinculadaAlPrincipio reader (){
+		ListaVinculadaAlPrincipio usuarios = new ListaVinculadaAlPrincipio();
+		String csvFile = "dataset_500000.csv";
 		String line = "";
 		String cvsSplitBy = ";";
 
@@ -21,7 +27,8 @@ public class Simulador2 {
 
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
-				usuarios.agregar(usuario);
+				Nodo n = new Nodo(usuario);
+				usuarios.add(n);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -29,7 +36,7 @@ public class Simulador2 {
 		return usuarios;
 	}
 
-	public static void writterAlta(ArregloUsuario usuarios){
+	public static void writterAlta(ListaVinculadaAlPrincipio usuarios){
 
 		String csvFile = "dataset_insert_10000.csv";
 		String line = "";
@@ -38,7 +45,7 @@ public class Simulador2 {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
-			File file = new File("salidaAltaAr1000000.csv");
+			File file = new File("salidaAlta13.csv");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -56,8 +63,8 @@ public class Simulador2 {
 				time_start = System.nanoTime();
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
-				usuarios.agregar(usuario);
-
+				Nodo n = new Nodo(usuario);
+				usuarios.add(n);
 				time_end = System.nanoTime();
 
 				String contenidoLinea1 = items[0]+";"+(( time_end - time_start ));
@@ -78,7 +85,7 @@ public class Simulador2 {
 		}
 	}
 
-	public static void writterBusqueda(ArregloUsuario usuarios){
+	public static void writterBusqueda(ListaVinculadaAlPrincipio usuarios){
 
 		String csvFile = "dataset_busqueda_10000.csv";
 		String line = "";
@@ -87,7 +94,7 @@ public class Simulador2 {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
-			File file = new File("salidaBusquedaAr1000000.csv");
+			File file = new File("salidaBusqueda14.csv");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -104,7 +111,7 @@ public class Simulador2 {
 			while ((line = br.readLine()) != null) {
 				time_start = System.nanoTime();
 				String[] items = line.split(cvsSplitBy);
-				boolean existe = usuarios.existe(items[0]);
+				boolean existe = usuarios.contiene(items[0]);
 				time_end = System.nanoTime();
 
 
@@ -133,7 +140,7 @@ public class Simulador2 {
 
 	public static void main(String[] args) {
 
-		ArregloUsuario us = new ArregloUsuario();
+		ListaVinculadaAlPrincipio us = new ListaVinculadaAlPrincipio();
 		us = reader();
 		writterAlta(us);
 		writterBusqueda(us);

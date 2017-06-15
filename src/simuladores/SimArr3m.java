@@ -1,4 +1,4 @@
-package programacionIII.TPE.listaCargaFinal;
+package simuladores;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,10 +7,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Simulador3 {
+import estructuras.ArregloUsuario;
+import estructuras.Usuario;
 
-	public static ListaVinculadaAlFinal reader (){
-		ListaVinculadaAlFinal usuarios = new ListaVinculadaAlFinal();
+public class SimArr3m {
+
+	public static ArregloUsuario reader (){
+		ArregloUsuario usuarios = new ArregloUsuario();
 		String csvFile = "dataset_3000000.csv";
 		String line = "";
 		String cvsSplitBy = ";";
@@ -21,7 +24,8 @@ public class Simulador3 {
 
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
-				usuarios.add(usuario);
+				usuarios.agregar(usuario);
+
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -29,7 +33,7 @@ public class Simulador3 {
 		return usuarios;
 	}
 
-	public static void writterAlta(ListaVinculadaAlFinal usuarios){
+	public static void writterAlta(ArregloUsuario usuarios){
 
 		String csvFile = "dataset_insert_10000.csv";
 		String line = "";
@@ -38,7 +42,7 @@ public class Simulador3 {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
-			File file = new File("salidaAlta11.csv");
+			File file = new File("salidaAltaAr3000000.csv");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -56,7 +60,7 @@ public class Simulador3 {
 				time_start = System.nanoTime();
 				String[] items = line.split(cvsSplitBy);
 				Usuario usuario = new Usuario(items);
-				usuarios.add(usuario);
+				usuarios.agregar(usuario);
 
 				time_end = System.nanoTime();
 
@@ -78,7 +82,7 @@ public class Simulador3 {
 		}
 	}
 
-	public static void writterBusqueda(ListaVinculadaAlFinal usuarios){
+	public static void writterBusqueda(ArregloUsuario usuarios){
 
 		String csvFile = "dataset_busqueda_10000.csv";
 		String line = "";
@@ -87,7 +91,7 @@ public class Simulador3 {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 
-			File file = new File("salidaBusqueda12.csv");
+			File file = new File("salidaBusquedaAr3000000.csv");
 			if (!file.exists()) {
 				file.createNewFile();
 			}
@@ -104,7 +108,7 @@ public class Simulador3 {
 			while ((line = br.readLine()) != null) {
 				time_start = System.nanoTime();
 				String[] items = line.split(cvsSplitBy);
-				boolean existe = usuarios.contiene(items[0]);
+				boolean existe = usuarios.existe(items[0]);
 				time_end = System.nanoTime();
 
 
@@ -133,11 +137,10 @@ public class Simulador3 {
 
 	public static void main(String[] args) {
 
-		ListaVinculadaAlFinal us = new ListaVinculadaAlFinal();
+		ArregloUsuario us = new ArregloUsuario();
 		us = reader();
 		writterAlta(us);
-		writterBusqueda(us);
+     	writterBusqueda(us);
 	}
 
 }
-

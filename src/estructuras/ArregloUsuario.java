@@ -1,4 +1,5 @@
-package programacionIII.TPE.arreglo;
+package estructuras;
+
 
 public class ArregloUsuario {
 
@@ -83,7 +84,7 @@ public class ArregloUsuario {
 	
 	public void ordenarArregloQuickSort(){
 		//Ordenamiento mediante QuickSort 
-		new Quicksort(arreglo,cantElem);
+		Ordenamientos.quickSort(arreglo, cantElem);
 		
 	}
 	
