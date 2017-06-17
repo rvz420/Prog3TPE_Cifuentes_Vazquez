@@ -85,26 +85,26 @@ public class Grafo {
 		return masGustado;
 	}
 
-	private int getClave(String dato) {
-		int c = 0;
+	private int getIdVertice(String dato) {
+		int id = 0;
 		if(existe(dato)) {
-			c = buscarVertice(dato).getId();
+			id = buscarVertice(dato).getId();
 		}
 		
-		return c;
+		return id;
 	}
 	
-	private String extraerMinimo(ListaVinculada cola, int[] dist) {
+	private String getMinimo(ListaVinculada fila, int[] arrDistancia) {
 		String menor;
 		int menorCant;
-		Nodo cursor = cola.getFirst();
+		Nodo cursor = fila.getFirst();
 		menor = cursor.getElemento();
-		int c = getClave(menor);
-		menorCant = dist[c];
+		int id = getIdVertice(menor);
+		menorCant = arrDistancia[id];
 		while(cursor != null) {
-			int clav = getClave(cursor.getElemento());
-			if(menorCant > dist[clav]) {
-				menorCant = dist[clav];
+			int clav = getIdVertice(cursor.getElemento());
+			if(menorCant > arrDistancia[clav]) {
+				menorCant = arrDistancia[clav];
 				menor = cursor.getElemento();
 			}
 			cursor = cursor.getSig();
@@ -112,7 +112,7 @@ public class Grafo {
 		return menor;
 	}
 	
-	public String idConGustosMasLejanos(String id) {
+	public String usuarioGustosMasLejanos(String id) {
 		int[] distancias = Dijkstra(id);
 		int mayor = distancias[0];
 		int pos = 0;
@@ -128,36 +128,36 @@ public class Grafo {
 	}
 	
 	private int[] Dijkstra(String origen){
-		ListaVinculada cola = new ListaVinculada();
-		int[] dist = new int[tamanio+1];
-		int clave=0;
-		for (int i = 0; i < dist.length; i++) {
-			dist[i] = Integer.MAX_VALUE;
+		ListaVinculada fila = new ListaVinculada();
+		int[] arrDistancia = new int[tamanio+1];
+		int id=0;
+		for (int i = 0; i < arrDistancia.length; i++) {
+			arrDistancia[i] = Integer.MAX_VALUE;
 		}            
 		if(existe(origen)) {
-			clave = getClave(origen);
+			id = getIdVertice(origen);
 		}
-		dist[clave] = 0;                    //DISTANCIA DEL ORIGEN
-		while(!cola.isEmpty()){
-		    String min = extraerMinimo(cola,dist);      
-			cola.eliminar(min);
-			int claveMin = 0;
+		arrDistancia[id] = 0;                    
+		while(!fila.isEmpty()){
+		    String min = getMinimo(fila,arrDistancia);      
+		    fila.eliminar(min);
+			int idMin = 0;
 			ListaVinculada ady = new ListaVinculada();
 			if(existe(min)) {
-				claveMin = getClave(min);
+				idMin = getIdVertice(min);
 				ady = buscarVertice(min).getAdyacentes();
 			}
 			
 			Nodo cursor = ady.getFirst();
 			while(cursor != null) {
 				String dato = cursor.getElemento();
-				int c = getClave(dato);
-				int distancia = dist[claveMin] + 1; //SE TOMA 1 POR TOMAR EL COSTO DEL GRAFO
-				if(distancia < dist[c])
-					dist[c] = distancia;
+				int idVer = getIdVertice(dato);
+				int distancia = arrDistancia[idMin] + 1; 
+				if(distancia < arrDistancia[idVer])
+					arrDistancia[idVer] = distancia;
 			}
 		}
-		return dist;
+		return arrDistancia;
 	}
 	
 	public void agregarUsuario(String dni){

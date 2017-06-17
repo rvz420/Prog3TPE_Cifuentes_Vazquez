@@ -41,6 +41,8 @@ public class SimGrafo3m {
 
 		System.out.println("Gusto mas gustado");
 		System.out.println(grafo.masGustado());
+		
+		System.out.println(grafo.usuarioGustosMasLejanos("71095014"));
 	}
 
 }
