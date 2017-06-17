@@ -1,5 +1,7 @@
 package etapa_3;
 
+
+
 public class ListaVinculada {
 	private Nodo first = null;
 	private int cantElem = 0;
@@ -43,6 +45,23 @@ public class ListaVinculada {
 	public void delete(){
 		first=first.getSig();
 		cantElem--;
+	}
+	
+	public void eliminar(String dato) {
+		Nodo pos = first;
+		if(first != null){
+			if(dato == first.getElemento()) {
+				first = first.getSig();
+				cantElem--;
+			}
+			else { while((pos.getSig() != null)&&(!dato.equals(pos.getSig().getElemento())))
+						pos = first.getSig();
+				   if(dato == pos.getSig().getElemento()){
+					   pos.setSig(pos.getSig().getSig());
+					   cantElem--;
+				   }
+			}
+		}
 	}
 
 	public int size() {

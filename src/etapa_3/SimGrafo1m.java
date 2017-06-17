@@ -35,10 +35,10 @@ public class SimGrafo1m {
 
 		Grafo grafo = new Grafo();
 		grafo = reader();
-		
+
 		System.out.println("Gustos similares");
 		System.out.println(grafo.gustosSimilares("71095014"));
-		
+
 		System.out.println("Gusto mas gustado");
 		System.out.println(grafo.masGustado());
 	}

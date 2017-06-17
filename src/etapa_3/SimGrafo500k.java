@@ -24,8 +24,8 @@ public class SimGrafo500k {
 				for (int i = 1; i < items.length; i++) {
 					grafo.addGustoUser(items[i], items[0]);
 				}
-				
-				
+
+
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -37,13 +37,13 @@ public class SimGrafo500k {
 
 		Grafo grafo = new Grafo();
 		grafo = reader();
-		
+
 		System.out.println("Gustos similares");
 		System.out.println(grafo.gustosSimilares("71095014"));
-		
+
 		System.out.println("Gusto mas gustado");
 		System.out.println(grafo.masGustado());
-		
+
 	}
 
 }
